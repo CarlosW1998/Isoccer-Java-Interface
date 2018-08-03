@@ -1,9 +1,8 @@
 package com.p3.isoccer.model;
 
-public class Fans {
-    public String name, addrs, cpf, email;
-    private int id;
-    public double value;
+public class recouses {
+    public  String Type;
+    public int max_ocupatio, wc, lach, id;
 
     public void setId(int i) {
         this.id = i;
@@ -11,4 +10,5 @@ public class Fans {
     public int getId() {
         return this.id;
     }
+
 }
