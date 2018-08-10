@@ -28,6 +28,7 @@ public class API {
                 throw new RuntimeException("Credenciais incorretas");
             }
             token = response.getBody().getObject().getString("token");
+
         } catch (UnirestException e) {
             e.printStackTrace();
         }
@@ -35,22 +36,57 @@ public class API {
     public  boolean hasToken() {
         return !token.isEmpty();
     }
-    public void createEmployee(Employee e) throws UnirestException {
+    private void mensagem(int code)
+    {
+        if(code == 200){
+            System.out.println("Operaçao Concluida Com Sucesso");
+        }
+        else{
+            System.out.println("Ocorrue um Eror na Operação");
+        }
+    }
+
+    public void create(JSONObject json, String Url) throws UnirestException {
         if (token.isEmpty()) {
             throw new RuntimeException("Not Authenticated");
         }
-        JSONObject json = new JSONObject();
-        json.put("name", e.name);
-        json.put("function", e.function);
-        json.put("email", e.email);
-        json.put("cpf", e.cpf);
-        json.put("tel", e.tel);
-        json.put("aditional", e.aditional);
-        json.put("salario", e.salario);
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8000/employee/")
+        HttpResponse<JsonNode> response = Unirest.post(Url)
+                .header("Authorization", "JWT " + token)
+                .header("Content-Type", "application/json").body(json).asJson();
+        mensagem(response.getStatus());
+    }
+
+    public void update(JSONObject json, String Url) throws UnirestException {
+        if (token.isEmpty()) {
+            throw new RuntimeException("Not Authenticated");
+        }
+        HttpResponse<JsonNode> response = Unirest.put(Url)
                 .header("Authorization", "JWT " + token)
                 .header("Content-Type", "application/json").body(json).asJson();
         System.out.println(response.getStatus());
+    }
+    public JSONObject detail(JSONObject json, String Url) throws UnirestException {
+        if (token.isEmpty()) {
+            throw new RuntimeException("Not Authenticated");
+        }
+        HttpResponse<JsonNode> response = Unirest.put(Url)
+                .header("Authorization", "JWT " + token)
+                .header("Content-Type", "application/json").body(json).asJson();
+
+        JSONObject myj = response.getBody().getObject();
+        mensagem(response.getStatus());
+        return myj;
+    }
+
+    public void delete(String Url) throws UnirestException {
+        if (token.isEmpty()) {
+            throw new RuntimeException("Not Authenticated");
+        }
+        HttpResponse<JsonNode> response = Unirest.delete(Url)
+                .header("Authorization", "JWT " + token)
+                .header("Content-Type", "application/json").asJson();
+        mensagem(response.getStatus());
+
     }
 
     public ArrayList<Employee> getEmployee()throws UnirestException {
@@ -68,64 +104,11 @@ public class API {
         for(int i = 0; i < n.length(); i++)
         {
             JSONObject myj = n.getJSONObject(i);
-            emp =  new Employee();
-            emp.name = myj.getString("name");
-            emp.aditional = myj.getString("aditional");
-            emp.cpf = myj.getString("cpf");
-            emp.email = myj.getString("email");
-            emp.function = myj.getString("function");
-            emp.salario = myj.getDouble("salario");
-            emp.tel = myj.getString("tel");
-            emp.setId(myj.getInt("id"));
+            emp =  new Employee(myj.getString("name"), myj.getString("function"), myj.getString("email"), myj.getString("cpf"), myj.getString("tel"), myj.getDouble("salario"));
+
             myemployyeslist.add(emp);
         }
         return myemployyeslist;
-    }
-
-    public void deleteEmployee(int id) throws UnirestException {
-        if (token.isEmpty()) {
-            throw new RuntimeException("Not Authenticated");
-        }
-        HttpResponse<JsonNode> response = Unirest.delete("http://localhost:8000/employee/" + id)
-                .header("Authorization", "JWT " + token)
-                .header("Content-Type", "application/json").asJson();
-
-    }
-    public void detailEmployee(int id) throws UnirestException {
-        if (token.isEmpty()) {
-            throw new RuntimeException("Not Authenticated");
-        }
-        HttpResponse<JsonNode> response = Unirest.put("http://localhost:8000/employee/" + id)
-                .header("Authorization", "JWT " + token)
-                .header("Content-Type", "application/json").asJson();
-
-        JSONObject json = response.getBody().getObject();
-        String a = json.getString("name");
-        System.out.println("FUNCAO:" + json.getString("function"));
-        System.out.println("NOME:" + json.getString("name"));
-        System.out.println("CPF: " + json.getString("cpf"));
-        System.out.println("EMAIL: " + json.getString("email"));
-        System.out.println("TEL: " + json.getString("tel"));
-        System.out.println("SALARIO: " + json.getDouble("salario"));
-
-    }
-
-
-
-    public void createFans(Fans e) throws UnirestException {
-        if (token.isEmpty()) {
-            throw new RuntimeException("Not Authenticated");
-        }
-        JSONObject json = new JSONObject();
-        json.put("name", e.name);
-        json.put("adress", e.addrs);
-        json.put("email", e.email);
-        json.put("cpf", e.cpf);
-        json.put("value", e.value);
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8000/fans/")
-                .header("Authorization", "JWT " + token)
-                .header("Content-Type", "application/json").body(json).asJson();
-        System.out.println(response.getStatus());
     }
 
     public ArrayList<Fans> getFans()throws UnirestException {
@@ -143,56 +126,17 @@ public class API {
         for(int i = 0; i < n.length(); i++)
         {
             JSONObject myj = n.getJSONObject(i);
-            emp =  new Fans();
-            emp.name = myj.getString("name");
-            emp.cpf = myj.getString("cpf");
-            emp.email = myj.getString("email");
-            emp.addrs = myj.getString("adress");
-            emp.value = myj.getDouble("value");
+            emp =  new Fans(myj.getString("name"), myj.getString("adress"), myj.getString("cpf"), myj.getString("email"), "Status", myj.getInt("id"), myj.getDouble("value"));
+
             emp.setId(myj.getInt("id"));
+
             myemployyeslist.add(emp);
         }
         return myemployyeslist;
     }
-    public void deleteFans(int id) throws UnirestException {
-        if (token.isEmpty()) {
-            throw new RuntimeException("Not Authenticated");
-        }
-        HttpResponse<JsonNode> response = Unirest.delete("http://localhost:8000/fans/" + id)
-                .header("Authorization", "JWT " + token)
-                .header("Content-Type", "application/json").asJson();
-    }
-    public void retriveFans(Fans e) throws UnirestException {
-        if (token.isEmpty()) {
-            throw new RuntimeException("Not Authenticated");
-        }
-        JSONObject json = new JSONObject();
-        json.put("name", e.name);
-        json.put("adress", e.addrs);
-        json.put("email", e.email);
-        json.put("cpf", e.cpf);
-        json.put("value", e.value);
-        HttpResponse<JsonNode> response = Unirest.put("http://localhost:8000/fans/" + e.getId())
-                .header("Authorization", "JWT " + token)
-                .header("Content-Type", "application/json").body(json).asJson();
-        System.out.println(response.getStatus());
-    }
-    public void createRecourses(recouses e) throws UnirestException {
-        if (token.isEmpty()) {
-            throw new RuntimeException("Not Authenticated");
-        }
-        JSONObject json = new JSONObject();
-        json.put("type", e.Type);
-        json.put("max_ocupation ", e.max_ocupatio);
-        json.put("wc", e.wc);
-        json.put("lanch ", e.lach);
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8000/recourse/")
-                .header("Authorization", "JWT " + token)
-                .header("Content-Type", "application/json").body(json).asJson();
-        System.out.println(response.getStatus());
-    }
 
-    public ArrayList<recouses> createRecourse()throws UnirestException {
+
+    public ArrayList<recouses> getRecourse()throws UnirestException {
         if (token.isEmpty()) {
             throw new RuntimeException("Not Authenticated");
         }
@@ -206,12 +150,8 @@ public class API {
         recouses emp;
         for(int i = 0; i < n.length(); i++)
         {
-            JSONObject myj = n.getJSONObject(i);
-            emp =  new recouses();
-            emp.Type = myj.getString("type");
-            emp.max_ocupatio = myj.getInt("max_ocupation ");
-            emp.wc = myj.getInt("wc ");
-            emp.ad = myj.getInt("lanch");
+            JSONObject a = n.getJSONObject(i);
+            emp = new recouses(a.getString("Type"), a.getInt("id"),   a.getInt("max_ocupation"));
 
             myemployyeslist.add(emp);
         }
