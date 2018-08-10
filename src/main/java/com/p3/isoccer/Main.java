@@ -18,6 +18,7 @@ public class Main {
         Scanner s = new Scanner(System.in);
         API api = new API();
         int option;
+        Dysplay myDyplay = new Dysplay();
         System.out.println("Bem-vindo ao isoccer");
         while(true)
         {
@@ -35,6 +36,16 @@ public class Main {
                 System.out.println("-1 para sair");
 
                 option = s.nextInt();
+                if(option == 1){
+                    myDyplay.dysplayrecourses(api);
+                }
+                else if(option == 2){
+                    myDyplay.dysplayEmployee(api);
+                }
+                else if(option == 3)
+                {
+                    myDyplay.dysplayFans(api);
+                }
                 if(option == -1){break;};
             }
         }
