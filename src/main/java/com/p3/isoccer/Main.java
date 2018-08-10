@@ -2,6 +2,7 @@ package com.p3.isoccer;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.p3.isoccer.Controler.Dysplay;
 import com.p3.isoccer.model.*;
 import com.p3.isoccer.rest.API;
 
@@ -18,7 +19,7 @@ public class Main {
         Scanner s = new Scanner(System.in);
         API api = new API();
         int option;
-        Dysplay myDyplay = new Dysplay();
+        Dysplay myDysplay = new Dysplay();
         System.out.println("Bem-vindo ao isoccer");
         while(true)
         {
@@ -37,14 +38,14 @@ public class Main {
 
                 option = s.nextInt();
                 if(option == 1){
-                    myDyplay.dysplayrecourses(api);
+                    myDysplay.dysplayrecourses(api);
                 }
                 else if(option == 2){
-                    myDyplay.dysplayEmployee(api);
+                    myDysplay.dysplayEmployee(api);
                 }
                 else if(option == 3)
                 {
-                    myDyplay.dysplayFans(api);
+                    myDysplay.dysplayFans(api);
                 }
                 if(option == -1){break;};
             }
