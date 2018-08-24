@@ -30,7 +30,7 @@ public class Recouses {
         String url = "http://localhost:8000/recourse/";
         JSONObject json = new JSONObject();
         json.put("Type", getType());
-        json.put("quant", getQuant());
+        json.put("max_ocupation", getQuant());
 
         try {
             api.create(json, url);

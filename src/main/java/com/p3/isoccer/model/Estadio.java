@@ -12,6 +12,21 @@ public class Estadio extends Recouses {
     {
     }
 
+    @Override
+    public void create(API api){
+        String url = "http://localhost:8000/recourse/";
+        JSONObject json = new JSONObject();
+        json.put("Type", getType());
+        json.put("max_ocupation", getQuant());
+        json.put("wc", getWc());
+        json.put("lanch", getLanch());
+
+        try {
+            api.create(json, url);
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+    }
 
     public int getWc() {
         return wc;
@@ -32,6 +47,7 @@ public class Estadio extends Recouses {
     public void setMaxCap(int maxCap) {
         this.maxCap = maxCap;
     }
+
     public void setLanch(int lanch)
     {
         this.lanch = lanch;

@@ -100,7 +100,7 @@ public class Creater {
 
         System.out.print("Contribuicao: ");
         aux = in.nextLine();
-        e.setValue(Integer.parseInt(aux));
+        e.setValue(Double.parseDouble(aux));
 
         e.create(this.api);
     }
@@ -108,17 +108,14 @@ public class Creater {
     public void creteRecourse(){
         Scanner in = new Scanner(System.in);
         String aux;
-        Recouses e = new Recouses();
+        Recouses e;
 
         System.out.print("Tipo: ");
         aux = in.nextLine();
-        e.setType(aux);
+        if(aux.equals("Estadio")){
+            e = new Estadio();
+            e.setType(aux);
 
-        System.out.print("Quantidade: ");
-        aux = in.nextLine();
-        e.setQuant(Integer.parseInt(aux));
-
-        if(e.getType().equals("Estadio")){
 
             System.out.print("Quantidade de Bnaheiros: ");
             aux = in.nextLine();
@@ -131,6 +128,19 @@ public class Creater {
             System.out.print("Capacidade Maxima: ");
             aux = in.nextLine();
             ((Estadio)e).setMaxCap(Integer.parseInt(aux));
+
+        }
+        else {
+            e = new Recouses();
+        }
+
+        System.out.print("Quantidade: ");
+        aux = in.nextLine();
+        e.setQuant(Integer.parseInt(aux));
+
+        if(e instanceof Estadio){
+            ((Estadio)e).create(this.api);
+            return;
         }
         e.create(this.api);
     }

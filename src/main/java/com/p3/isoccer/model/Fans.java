@@ -35,7 +35,7 @@ public class Fans {
         json.put("adress", getAddrs());
         json.put("email", getEmail());
         json.put("cpf", getCpf());
-        json.put("value", getStatus());
+        json.put("value", getValue());
         try {
             api.create(json, url);
         } catch (UnirestException e) {

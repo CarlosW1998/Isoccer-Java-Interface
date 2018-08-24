@@ -36,7 +36,9 @@ public class Main {
                 System.out.println("Tecle 1 para Listar os recursos-");
                 System.out.println("Tecke 2 para Listar os Funcionarios");
                 System.out.println("Tecke 3 para Listar os fans");
-                System.out.println("Tecke 4 para Listar adicionar Funcionarios");
+                System.out.println("Tecke 4 para Listar adicionar um Funcionario");
+                System.out.println("Tecke 5 para Listar adicionar um torcedor");
+                System.out.println("Tecke 6 para Listar adicionar um recurso");
                 System.out.println("-1 para sair");
 
                 option = s.nextInt();
@@ -51,6 +53,12 @@ public class Main {
                 }
                 else if(option == 4) {
                     myCreater.createEmployee();
+                }
+                else if(option == 5){
+                    myCreater.creteFan();
+                }
+                else if(option == 6){
+                    myCreater.creteRecourse();
                 }
                 if(option == -1){break;};
             }

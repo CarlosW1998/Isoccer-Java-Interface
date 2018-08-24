@@ -43,7 +43,7 @@ public class API {
             System.out.println("Operaçao Concluida Com Sucesso");
         }
         else if(code == 201) {
-            System.out.println("Usuario Ciado");
+            System.out.println("Criação relizada com sucesso");
         }
         else if(code == 400) {
             System.out.println("Dados invaldos");
@@ -146,7 +146,6 @@ public class API {
             emp.setAddrs(myj.getString("adress"));
             emp.setCpf(myj.getString("cpf"));
             emp.setEmail(myj.getString("email"));
-            emp.setStatus(myj.getString("Status"));
             emp.setValue(myj.getDouble("value"));
 
             myemployyeslist.add(emp);
