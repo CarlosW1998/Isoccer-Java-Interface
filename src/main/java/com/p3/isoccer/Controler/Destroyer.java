@@ -6,7 +6,7 @@ import com.p3.isoccer.model.Recouses;
 import com.p3.isoccer.rest.API;
 
 public class Destroyer {
-    API api;
+    private API api;
     public Destroyer(API api){
         this.api = api;
     }
