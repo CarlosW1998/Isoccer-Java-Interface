@@ -6,12 +6,11 @@ import org.json.JSONObject;
 
 public class Medico extends Employee {
     private String crm;
-    public Medico(String name, String function, String email, String cpf, String tel, double salario, String crm)
+    public Medico()
     {
-        super(name, function, email, cpf, tel, salario);
-        this.crm = crm;
     }
 
+    @Override
     public void create(API api)
     {
         String url = "http://localhost:8000/employee/";
@@ -29,6 +28,8 @@ public class Medico extends Employee {
             e.printStackTrace();
         }
     }
+
+    @Override
     public void update(API api)
     {
         String url = "http://localhost:8000/employee/";

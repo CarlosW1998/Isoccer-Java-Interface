@@ -9,15 +9,12 @@ public class Fans {
     private int id;
     private double value;
 
-    public Fans(String nome, String addrs, String cpf, String email, String Status, int id, double value)
+    public Fans()
     {
-        this.name = nome;
-        this.addrs = addrs;
-        this.cpf = cpf;
-        this.email = email;
-        this.status = Status;
-        this.id = id;
-        this.value = value;
+    }
+
+    public String toString(){
+        return "Id: " + getId() + " || Name: " + getName() + " || Status: " + getStatus() +"\n";
     }
 
     public void delete(API api)
@@ -35,10 +32,10 @@ public class Fans {
         String url = "http://localhost:8000/fans/";
         JSONObject json = new JSONObject();
         json.put("name", getName());
-        json.put("function", getAddrs());
+        json.put("adress", getAddrs());
         json.put("email", getEmail());
         json.put("cpf", getCpf());
-        json.put("tel", getValue());
+        json.put("value", getStatus());
         try {
             api.create(json, url);
         } catch (UnirestException e) {
@@ -62,7 +59,7 @@ public class Fans {
     }
 
 
-    public void setId(int i) {
+    private void setId(int i) {
         this.id = i;
     }
     public void setName(String name) {

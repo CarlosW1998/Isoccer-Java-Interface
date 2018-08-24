@@ -6,12 +6,11 @@ import org.json.JSONObject;
 
 public class Motorista extends Employee {
     private String habilitacao;
-    public Motorista(String name, String function, String email, String cpf, String tel, double salario, String habilitacao)
-    {
-        super(name, function, email, cpf, tel, salario);
-        this.habilitacao = habilitacao;
+
+    public Motorista() {
     }
 
+    @Override
     public void create(API api)
     {
         String url = "http://localhost:8000/employee/";
@@ -29,6 +28,7 @@ public class Motorista extends Employee {
             e.printStackTrace();
         }
     }
+    @Override
     public void update(API api)
     {
         String url = "http://localhost:8000/employee/";

@@ -6,12 +6,11 @@ import org.json.JSONObject;
 
 public class Jogador extends Employee {
     private String posicao;
-    public Jogador(String name, String function, String email, String cpf, String tel, double salario, String posicao)
+    public Jogador()
     {
-        super(name, function, email, cpf, tel, salario);
-        this.posicao = posicao;
     }
 
+    @Override
     public void create(API api)
     {
         String url = "http://localhost:8000/employee/";
@@ -29,6 +28,7 @@ public class Jogador extends Employee {
             e.printStackTrace();
         }
     }
+    @Override
     public void update(API api)
     {
         String url = "http://localhost:8000/employee/";
