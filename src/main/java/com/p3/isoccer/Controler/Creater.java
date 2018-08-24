@@ -18,14 +18,40 @@ public class Creater {
     {
         Scanner in = new Scanner(System.in);
         String aux;
-        Employee e = new Employee();
+        Employee e;
+        System.out.print("Funcao: ");
+        aux = in.nextLine();
+        if(aux.equals("Medico")) {
+            e = new Medico();
+            e.setFunction(aux);
+            System.out.print("CRM: ");
+            aux = in.nextLine();
+            ((Medico)e).setCrm(aux);
+        }
+        else if(aux.equals("Jogador"))
+        {
+            e = new Jogador();
+            e.setFunction(aux);
+            System.out.print("Posicao: ");
+            aux = in.nextLine();
+            ((Jogador) e).setPosicao(aux);
+        }
+        else if(aux.equals("Motorista")){
+            e = new Motorista();
+            e.setFunction(aux);
+            System.out.print("Habilitacao: ");
+            aux = in.nextLine();
+            ((Motorista) e).sethabilitacao(aux);
+        }
+        else{
+            e = new Employee();
+            e.setFunction(aux);
+        }
+
         System.out.print("Nome: ");
         aux = in.nextLine();
         e.setName(aux);
 
-        System.out.print("Funcao: ");
-        aux = in.nextLine();
-        e.setFunction(aux);
 
         System.out.print("Email: ");
         aux = in.nextLine();
@@ -43,24 +69,6 @@ public class Creater {
         aux = in.nextLine();
         e.setSalario(Double.parseDouble(aux));
 
-        if(e.getFunction().equals("Medico")){
-            e = (Medico) e;
-            System.out.print("CRM: ");
-            aux = in.nextLine();
-            ((Medico) e).setCrm(aux);
-        }
-        else if(e.getFunction().equals("Jogador")){
-            e = (Jogador) e;
-            System.out.print("Posicao: ");
-            aux = in.nextLine();
-            ((Jogador) e).setPosicao(aux);
-        }
-        else if(e.getFunction().equals("Motorista")){
-            e = (Motorista) e;
-            System.out.print("Posicao: ");
-            aux = in.nextLine();
-            ((Motorista) e).sethabilitacao(aux);
-        }
         e.create(this.api);
     }
 

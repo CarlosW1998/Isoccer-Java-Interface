@@ -29,8 +29,9 @@ public class API {
             }
             token = response.getBody().getObject().getString("token");
 
-        } catch (UnirestException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
+            System.out.println("Erro ao tentar acessar as credenciais");
         }
     }
     public  boolean hasToken() {
@@ -40,6 +41,12 @@ public class API {
     {
         if(code == 200){
             System.out.println("Operaçao Concluida Com Sucesso");
+        }
+        else if(code == 201) {
+            System.out.println("Usuario Ciado");
+        }
+        else if(code == 400) {
+            System.out.println("Dados invaldos");
         }
         else{
             System.out.println("Ocorrue um Eror na Operação");

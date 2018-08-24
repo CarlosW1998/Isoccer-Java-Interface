@@ -2,6 +2,7 @@ package com.p3.isoccer;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.p3.isoccer.Controler.Creater;
 import com.p3.isoccer.Controler.Dysplay;
 import com.p3.isoccer.model.*;
 import com.p3.isoccer.rest.API;
@@ -20,6 +21,7 @@ public class Main {
         API api = new API();
         int option;
         Dysplay myDysplay = new Dysplay();
+        Creater myCreater = new Creater(api);
         System.out.println("Bem-vindo ao isoccer");
         while(true)
         {
@@ -33,7 +35,8 @@ public class Main {
             {
                 System.out.println("Tecle 1 para Listar os recursos-");
                 System.out.println("Tecke 2 para Listar os Funcionarios");
-                System.out.println("Tecke 1 para Listar os fans");
+                System.out.println("Tecke 3 para Listar os fans");
+                System.out.println("Tecke 4 para Listar adicionar Funcionarios");
                 System.out.println("-1 para sair");
 
                 option = s.nextInt();
@@ -43,9 +46,11 @@ public class Main {
                 else if(option == 2){
                     myDysplay.dysplayEmployee(api);
                 }
-                else if(option == 3)
-                {
+                else if(option == 3) {
                     myDysplay.dysplayFans(api);
+                }
+                else if(option == 4) {
+                    myCreater.createEmployee();
                 }
                 if(option == -1){break;};
             }
