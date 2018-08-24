@@ -104,7 +104,14 @@ public class API {
         for(int i = 0; i < n.length(); i++)
         {
             JSONObject myj = n.getJSONObject(i);
-            emp =  new Employee(myj.getString("name"), myj.getString("function"), myj.getString("email"), myj.getString("cpf"), myj.getString("tel"), myj.getDouble("salario"));
+            emp =  new Employee();
+            emp.setId(myj.getInt("id"));
+            emp.setName(myj.getString("name"));
+            emp.setFunction(myj.getString("function"));
+            emp.setEmail(myj.getString("email"));
+            emp.setCpf(myj.getString("cpf"));
+            emp.setTel(myj.getString("tel"));
+            emp.setSalario(myj.getDouble("salario"));
 
             myemployyeslist.add(emp);
         }
@@ -126,9 +133,14 @@ public class API {
         for(int i = 0; i < n.length(); i++)
         {
             JSONObject myj = n.getJSONObject(i);
-            emp =  new Fans(myj.getString("name"), myj.getString("adress"), myj.getString("cpf"), myj.getString("email"), "Status", myj.getInt("id"), myj.getDouble("value"));
-
+            emp =  new Fans();
             emp.setId(myj.getInt("id"));
+            emp.setName(myj.getString("name"));
+            emp.setAddrs(myj.getString("adress"));
+            emp.setCpf(myj.getString("cpf"));
+            emp.setEmail(myj.getString("email"));
+            emp.setStatus(myj.getString("Status"));
+            emp.setValue(myj.getDouble("value"));
 
             myemployyeslist.add(emp);
         }
@@ -136,7 +148,7 @@ public class API {
     }
 
 
-    public ArrayList<recouses> getRecourse()throws UnirestException {
+    public ArrayList<Recouses> getRecourse()throws UnirestException {
         if (token.isEmpty()) {
             throw new RuntimeException("Not Authenticated");
         }
@@ -146,12 +158,15 @@ public class API {
         System.out.println(response.getStatus());
 
         JSONArray n= response.getBody().getArray();
-        ArrayList<recouses> myemployyeslist = new ArrayList<>();
-        recouses emp;
+        ArrayList<Recouses> myemployyeslist = new ArrayList<>();
+        Recouses emp;
         for(int i = 0; i < n.length(); i++)
         {
             JSONObject a = n.getJSONObject(i);
-            emp = new recouses(a.getString("Type"), a.getInt("id"),   a.getInt("max_ocupation"));
+            emp = new Recouses();
+            emp.setType(a.getString("Type"));
+            emp.setId(a.getInt("id"));
+            emp.setQuant(a.getInt("quant"));
 
             myemployyeslist.add(emp);
         }

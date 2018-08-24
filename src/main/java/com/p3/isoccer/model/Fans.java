@@ -59,7 +59,7 @@ public class Fans {
     }
 
 
-    private void setId(int i) {
+    public void setId(int i) {
         this.id = i;
     }
     public void setName(String name) {

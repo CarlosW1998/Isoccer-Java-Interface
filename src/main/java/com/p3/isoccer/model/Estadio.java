@@ -4,7 +4,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import com.p3.isoccer.rest.API;
 import org.json.JSONObject;
 
-public class Estadio extends recouses {
+public class Estadio extends Recouses {
 
     private int wc, maxCap, lanch;
 

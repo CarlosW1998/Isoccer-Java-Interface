@@ -124,6 +124,6 @@ public class Creater {
             aux = in.nextLine();
             ((Estadio)e).setMaxCap(Integer.parseInt(aux));
         }
-
+        e.create(this.api);
     }
 }
