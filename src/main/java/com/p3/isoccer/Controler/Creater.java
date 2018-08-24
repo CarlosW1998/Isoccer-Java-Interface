@@ -132,6 +132,7 @@ public class Creater {
         }
         else {
             e = new Recouses();
+            e.setType(aux);
         }
 
         System.out.print("Quantidade: ");

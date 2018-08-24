@@ -172,7 +172,7 @@ public class API {
             emp = new Recouses();
             emp.setType(a.getString("Type"));
             emp.setId(a.getInt("id"));
-            emp.setQuant(a.getInt("quant"));
+            emp.setQuant(a.getInt("max_ocupation"));
 
             myemployyeslist.add(emp);
         }
