@@ -2,16 +2,18 @@ package com.p3.isoccer.model;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.p3.isoccer.rest.API;
+import org.json.JSONObject;
 
-public class recouses {
+public class Recouses {
     private  String Type;
     private int id, quant;
 
-    public recouses(String Type, int id, int quant)
+    public Recouses()
     {
-        this.id = id;
-        this.Type = Type;
-        this.quant = quant;
+    }
+
+    public String toString() {
+        return "Id: " + getId() + " | Type: " + getType()  + " | Quantidade: " + getQuant();
     }
 
     public void delete(API api)
@@ -24,7 +26,32 @@ public class recouses {
         }
     }
 
-    public void setId(int i) {
+    public void create(API api){
+        String url = "http://localhost:8000/recourse/";
+        JSONObject json = new JSONObject();
+        json.put("Type", getType());
+        json.put("quant", getQuant());
+
+        try {
+            api.create(json, url);
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+    }
+    public void update(API api){
+        String url = "http://localhost:8000/recourse/";
+        JSONObject json = new JSONObject();
+        json.put("Type", getType());
+        json.put("quant", getQuant());
+
+        try {
+            api.update(json, url);
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setId(int i) {
         this.id = i;
     }
 
